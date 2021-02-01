@@ -1,0 +1,8 @@
+
+#photos{
+    display:flex;
+}
+
+.modal-body{
+    max-height: 100%;
+}

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="search_side">
+    <div>
+        <div class="buttons">
+            <div id="start_position_search">
+                <input type="text" id="start_position_text">
+                <button id="get_my_location_btn" class="btn btn-primary btn-lg">
+                    mylocation
+                </button>
+            </div>
+            <div id="end_position_search">
+                <input type="text" id="dest_position_text">
+                <button type="button" id="set_destination_btn">OpenModal</button>
+            </div>
+        </div>
+    </div>
+    <div id="ranking_container">
+        <ul id="ranking_list">
+            <li class="real_time_camping_ranking_data" data-rtk-rank="">
+                <a href=""></a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+
+<!-- modal part -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <section id="photos">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF9G-UFAbO7tFzELzAxyOETOskVhZv88S7wg&usqp=CAU">
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjnykgO2uMoADi1AqsoL4gpsDqyQHAQ85I2A&usqp=CAU">
+                    <img src="https://ojsfile.ohmynews.com/STD_IMG_FILE/2016/0516/IE001963941_STD.jpg">
+                </section>
+                <section id="reviews">
+                    <h3>review</h3>
+                    not good<br>
+                    its ok<br>
+                </section>
+                <section id="info">
+                    <h3>info</h3>
+
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
