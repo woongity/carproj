@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request, session, redirect, url_for
 import logging
 import json
+from flask import flash, make_response, jsonify
 from model.destinationForm import DestinationForm
 from model.camping_dao import CampingDao
 from model.dbModule import Database
@@ -30,21 +31,28 @@ def get_campings():
 @app.route('/search',methods=['GET','POST'])
 def search():
     camping_dao = CampingDao()
+    data = []
     if request.method == 'GET':
         searched_text = request.args["destination"]
-        print(searched_text)
-        camping_info = camping_dao.get_camping_info(searched_text)
-        if camping_info != None: 
+        try:
+            camping_info = camping_dao.search_camping_info(searched_text)
+        except:
+            print("error occured")
+        if camping_info != []: 
             data = to_json_array(camping_info)
         else :
-            data = None
+            data = []
     else:
         sido = request.form["sido"]
         gu = request.form["gu"]
-        camping_dao.get_camping_info(sido,gu)
-    # print(data)
-    return data
-    # TODO : which to input which to search
+        print(sido+gu)
+        try:
+            data = camping_dao.search_camping_info(sido,gu)
+            print(data)
+        except:
+            print("error occured")
+    return jsonify(data)
+
 
 @app.route('/main',methods = ['GET','POST'])
 def main():
@@ -59,10 +67,12 @@ def main():
 #     search_string = search.data['']
 #     return results
 
-@app.route('/ranking/<theme>')
-def get_ranking(theme):
-    ranking = []
-    sql = "select * rank() over(order by desc) as ranking where from"
+@app.route('/ranking')
+def get_ranking():
+    camping_dao = CampingDao()
+    # ranking = []
+    ranking = camping_dao.get_camping_ranking()
+    print(ranking)
     return ranking 
 # return top ranking camping sites via theme  ex) age, weather etc..
 

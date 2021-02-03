@@ -14,19 +14,25 @@ async function get_my_location() {
 }
 
 function select_city() {
-  var sido = document.querySelector("sido").value;
-  var gu = document.querySelector("gugun").value;
-  $.ajax({
-    type: 'POST',
-    url: '/search',
-    data: {
-      'sido': sido,
-      'gu': gu
-    },
-    success: function (msg) {
-      alert(msg);
-    }
-  });
+  var sido = document.querySelector("#sido").value;
+  var gu = document.querySelector("#gugun").value;
+  var result;
+  $.ajax({ 
+    url: "/search", 
+    type: "post", 
+    async: true, 
+    data: { 
+      "sido" : sido,  
+      "gu" : gu, 
+    }, 
+    success: function(data) {     
+      alert(data);
+    }, 
+    error: function(e) { 
+      alert("값을 가져오지 못했습니다."); 
+      print(e);
+    } 
+  }); 
 }
 // search function 
 function search() {
